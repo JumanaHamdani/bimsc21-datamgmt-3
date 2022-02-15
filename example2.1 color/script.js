@@ -18,9 +18,9 @@ const length_slider = document.getElementById("length");
 length_slider.addEventListener("mouseup", onSliderChange, false);
 length_slider.addEventListener("touchend", onSliderChange, false);
 
-const seed value_slider = document.getElementById("seed value");
-seed value_slider.addEventListener("mouseup", onSliderChange, false);
-seed value_slider.addEventListener("touchend", onSliderChange, false);
+const seed_value_slider = document.getElementById("seed_value");
+seed_value_slider.addEventListener("mouseup", onSliderChange, false);
+seed_value_slider.addEventListener("touchend", onSliderChange, false);
 
 const loader = new Rhino3dmLoader();
 loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
@@ -56,7 +56,7 @@ async function compute() {
   param2.append([0], [length_slider.valueAsNumber]);
 
   const param3 = new RhinoCompute.Grasshopper.DataTree("seed value");
-  param3.append([0], [seed value_slider.valueAsNumber]);
+  param3.append([0], [seed_value_slider.valueAsNumber]);
 
 
   // clear values
