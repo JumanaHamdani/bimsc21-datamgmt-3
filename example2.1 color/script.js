@@ -5,16 +5,22 @@ import rhino3dm from "https://cdn.jsdelivr.net/npm/rhino3dm@7.11.1/rhino3dm.modu
 import { RhinoCompute } from "https://cdn.jsdelivr.net/npm/compute-rhino3d@0.13.0-beta/compute.rhino3d.module.js";
 import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.124.0/examples/jsm/loaders/3DMLoader.js";
 
-const definitionName = "rnd_node.gh";
+const definitionName = "maze.gh";
 
 // Set up sliders
-const radius_slider = document.getElementById("radius");
-radius_slider.addEventListener("mouseup", onSliderChange, false);
-radius_slider.addEventListener("touchend", onSliderChange, false);
 
-const count_slider = document.getElementById("count");
-count_slider.addEventListener("mouseup", onSliderChange, false);
-count_slider.addEventListener("touchend", onSliderChange, false);
+const width_slider = document.getElementById("width");
+width_slider.addEventListener("mouseup", onSliderChange, false);
+width_slider.addEventListener("touchend", onSliderChange, false);
+
+
+const length_slider = document.getElementById("length");
+length_slider.addEventListener("mouseup", onSliderChange, false);
+length_slider.addEventListener("touchend", onSliderChange, false);
+
+const seed value_slider = document.getElementById("seed value");
+seed value_slider.addEventListener("mouseup", onSliderChange, false);
+seed value_slider.addEventListener("touchend", onSliderChange, false);
 
 const loader = new Rhino3dmLoader();
 loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
@@ -42,16 +48,23 @@ rhino3dm().then(async (m) => {
 });
 
 async function compute() {
-  const param1 = new RhinoCompute.Grasshopper.DataTree("Radius");
-  param1.append([0], [radius_slider.valueAsNumber]);
 
-  const param2 = new RhinoCompute.Grasshopper.DataTree("Count");
-  param2.append([0], [count_slider.valueAsNumber]);
+  const param1 = new RhinoCompute.Grasshopper.DataTree("width");
+  param1.append([0], [width_slider.valueAsNumber]);
+
+  const param2 = new RhinoCompute.Grasshopper.DataTree("length");
+  param2.append([0], [length_slider.valueAsNumber]);
+
+  const param3 = new RhinoCompute.Grasshopper.DataTree("seed value");
+  param3.append([0], [seed value_slider.valueAsNumber]);
+
 
   // clear values
   const trees = [];
   trees.push(param1);
   trees.push(param2);
+  trees.push(param3);
+
 
   const res = await RhinoCompute.Grasshopper.evaluateDefinition(
     definition,
